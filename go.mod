@@ -1,4 +1,4 @@
-module servicetemplate
+module usersservice
 
 go 1.25.5
 

@@ -2,7 +2,7 @@ package logger
 
 import (
 	"os"
-	"servicetemplate/pkg/env"
+	"usersservice/pkg/env"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

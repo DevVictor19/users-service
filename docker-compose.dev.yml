@@ -24,7 +24,7 @@ services:
       MYSQL_HOST: mysql
       MYSQL_PORT: "3306"
       MYSQL_USER: devuser
-      MYSQL_DBNAME: servicetemplate
+      MYSQL_DBNAME: users_db
       MYSQL_PASSWORD: devpassword
       MYSQL_MAX_OPEN_CONNS: "60"
       MYSQL_CONN_MAX_LIFETIME: "120"
@@ -38,7 +38,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: servicetemplate
+      MYSQL_DATABASE: users_db
       MYSQL_USER: devuser
       MYSQL_PASSWORD: devpassword
     volumes:

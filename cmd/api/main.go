@@ -2,15 +2,15 @@ package main
 
 import (
 	"log"
-	"servicetemplate/internal/server"
-	"servicetemplate/pkg/db"
-	"servicetemplate/pkg/env"
-	"servicetemplate/pkg/logger"
+	"usersservice/internal/server"
+	"usersservice/pkg/db"
+	"usersservice/pkg/env"
+	"usersservice/pkg/logger"
 )
 
-// @title Service Template API
+// @title Users Service API
 // @version 1.0
-// @description This is a sample server for a Service Template API.
+// @description This is a Users Service API documentation.
 // @termsOfService http://swagger.io/terms/
 
 // @contact.name DevVictor19

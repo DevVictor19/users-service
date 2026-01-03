@@ -2,8 +2,8 @@ package server
 
 import (
 	"net/http"
-	_ "servicetemplate/docs"
-	"servicetemplate/pkg/utils"
+	_ "usersservice/docs"
+	"usersservice/pkg/utils"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"

@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 	"log"
-	"servicetemplate/pkg/env"
+	"usersservice/pkg/env"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"

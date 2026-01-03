@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"servicetemplate/pkg/env"
-	"servicetemplate/pkg/logger"
 	"syscall"
+	"usersservice/pkg/env"
+	"usersservice/pkg/logger"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"

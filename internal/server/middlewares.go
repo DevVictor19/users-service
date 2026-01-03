@@ -1,9 +1,9 @@
 package server
 
 import (
-	"servicetemplate/pkg/logger"
-	"servicetemplate/pkg/utils"
 	"time"
+	"usersservice/pkg/logger"
+	"usersservice/pkg/utils"
 
 	"github.com/labstack/echo/v4"
 )
