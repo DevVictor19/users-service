@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func MapUsersRoutes(usersGroup *echo.Group, usersHandlers users.HttpHandlers) {
+func MapUsersRoutes(router *echo.Group, usersHandlers users.HttpHandlers) {
+	usersGroup := router.Group("/users")
 	usersGroup.POST("/auth/signup", usersHandlers.SignUp())
 }

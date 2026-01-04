@@ -44,11 +44,8 @@ func (s *Server) MapHandlers(e *echo.Echo) error {
 
 	v1.GET("/swagger/*", echoSwagger.WrapHandler)
 
-	// groups
-	usersGroup := v1.Group("/users")
-
 	// Map handlers
-	usersHttpHandlers.MapUsersRoutes(usersGroup, userHandlers)
+	usersHttpHandlers.MapUsersRoutes(v1, userHandlers)
 
 	return nil
 }
