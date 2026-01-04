@@ -1,4 +1,50 @@
 basePath: /api/v1
+definitions:
+  usersservice_internal_users_dtos.SignUpInputDTO:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      password:
+        minLength: 8
+        type: string
+    required:
+    - email
+    - first_name
+    - last_name
+    - password
+    type: object
+  usersservice_internal_users_dtos.UserDTO:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      email_verified:
+        type: boolean
+      external_id:
+        type: string
+      first_name:
+        type: string
+      identifier:
+        type: string
+      last_name:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  usersservice_pkg_httpErrors.RestError:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+    type: object
 host: localhost:8080
 info:
   contact:
@@ -12,5 +58,35 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Users Service API
   version: "1.0"
-paths: {}
+paths:
+  /users/auth/signup:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user
+      parameters:
+      - description: Sign Up Input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/usersservice_internal_users_dtos.SignUpInputDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/usersservice_internal_users_dtos.UserDTO'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/usersservice_pkg_httpErrors.RestError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/usersservice_pkg_httpErrors.RestError'
+      summary: Sign Up
+      tags:
+      - Users
 swagger: "2.0"
