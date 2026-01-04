@@ -3,6 +3,9 @@ package server
 import (
 	"net/http"
 	_ "usersservice/docs"
+	usersHttpHandlers "usersservice/internal/users/interfaces/http"
+	usersRepositories "usersservice/internal/users/repositories"
+	usersUseCase "usersservice/internal/users/usecase"
 	"usersservice/pkg/utils"
 
 	"github.com/labstack/echo/v4"
@@ -11,6 +14,16 @@ import (
 )
 
 func (s *Server) MapHandlers(e *echo.Echo) error {
+	// Init repositories
+	userRepo := usersRepositories.NewMySQLUsersRepository(s.db)
+
+	// Init useCases
+	userUC := usersUseCase.NewUsersUseCase(s.cfg, userRepo, s.logger)
+
+	// Init handlers
+	userHandlers := usersHttpHandlers.NewUsersHandlers(s.cfg, userUC, s.logger)
+
+	// Middlewares
 	e.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
 		StackSize:         1 << 10, // 1 KB
 		DisablePrintStack: true,
@@ -21,6 +34,7 @@ func (s *Server) MapHandlers(e *echo.Echo) error {
 	e.Use(middleware.BodyLimit("2M"))
 	e.Use(makeRequestLoggerMiddleware(s.logger))
 
+	// Routes
 	v1 := e.Group("/api/v1")
 
 	v1.GET("/health", func(c echo.Context) error {
@@ -29,6 +43,12 @@ func (s *Server) MapHandlers(e *echo.Echo) error {
 	})
 
 	v1.GET("/swagger/*", echoSwagger.WrapHandler)
+
+	// groups
+	usersGroup := v1.Group("/users")
+
+	// Map handlers
+	usersHttpHandlers.MapUsersRoutes(usersGroup, userHandlers)
 
 	return nil
 }
