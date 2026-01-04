@@ -12,6 +12,7 @@ services:
       - tmp-build:/app/tmp
     depends_on:
       - mysql
+      - keycloak
     environment:
       SERVER_MODE: development
       SERVER_ADDR: ":8080"
@@ -44,7 +45,20 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.7
+    container_name: keycloak
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    command: start-dev
+    ports:
+      - "8081:8080"
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+
 volumes:
   go-mod-cache:
   tmp-build:
   mysql-data:
+  keycloak-data:
